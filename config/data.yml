@@ -1,0 +1,40 @@
+# Data configuration
+data:
+  # Data sources and paths
+  raw_data_path: "data/raw"
+  processed_data_path: "data/processed"
+  sample_data_path: "data/sample"
+  
+  # Instruments
+  underlying: "SPX"
+  options_exchange: "CBOE"
+  
+  # Date ranges
+  start_date: "2020-01-01"
+  end_date: "2023-12-31"
+  train_start: "2020-01-01"
+  train_end: "2022-12-31"
+  test_start: "2023-01-01"
+  test_end: "2023-12-31"
+  
+  # Data quality filters
+  filters:
+    min_bid: 0.0
+    max_spread_pct: 0.5  # 50% of mid price
+    min_mid_price: 0.05
+    min_impl_vol: 0.01
+    max_impl_vol: 5.0
+    min_moneyness: 0.5
+    max_moneyness: 1.5
+    min_dte: 5
+    max_dte: 365
+    
+  # Market data alignment
+  market_times:
+    options_timestamp: "16:00:00"  # 4 PM ET
+    underlying_timestamp: "16:00:00"
+    rates_timestamp: "16:00:00"
+    
+  # Data refresh
+  refresh_frequency: "daily"
+  lookback_days: 30

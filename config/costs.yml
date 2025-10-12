@@ -1,0 +1,34 @@
+# Trading costs and slippage configuration
+costs:
+  # Options trading costs
+  options:
+    half_spread: true  # Use half of bid-ask spread
+    per_contract_fee: 0.65  # $ per contract
+    min_commission: 1.0  # Minimum commission per trade
+    max_commission: 50.0  # Maximum commission per trade
+    
+  # Underlying hedge costs
+  underlying:
+    half_spread: true
+    commission_per_share: 0.005  # $ per share
+    min_commission: 1.0
+    max_commission: 50.0
+    
+  # Slippage models
+  slippage:
+    # Linear slippage model: slippage = base_rate + participation_rate * size_factor
+    base_rate: 0.1  # 10% of spread
+    participation_rate: 0.05  # 5% per 100 contracts
+    max_slippage: 0.5  # Maximum 50% of spread
+    
+    # Market impact model (for large positions)
+    market_impact:
+      enabled: true
+      impact_factor: 0.001  # 0.1% per 1000 contracts
+      max_impact: 0.02  # Maximum 2% impact
+      
+  # Funding costs
+  funding:
+    borrow_rate: 0.02  # 2% annual borrow rate for short positions
+    margin_rate: 0.05  # 5% margin requirement
+    overnight_rate: 0.01  # 1% overnight funding rate

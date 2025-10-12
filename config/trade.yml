@@ -1,0 +1,52 @@
+# Trading strategy configuration
+trading:
+  # Position sizing
+  sizing:
+    target_vega: 100000  # Target portfolio vega
+    max_contract_weight: 0.1  # Max 10% per contract
+    max_book_vega: 200000  # Max total book vega
+    min_expected_pnl: 0.01  # Minimum expected PnL per contract
+    
+  # Contract selection
+  selection:
+    n_contracts: 20  # Number of contracts to select daily
+    top_quantile: 0.2  # Top 20% by expected PnL
+    min_open_interest: 100
+    min_volume: 50
+    max_spread_pct: 0.3  # Max 30% spread
+    
+  # Delta hedging
+  hedging:
+    max_delta: 1000  # Max net delta exposure
+    hedge_frequency: "daily"  # or "intraday"
+    hedge_threshold: 0.1  # Hedge when delta exceeds threshold
+    rebalance_threshold: 0.05  # Rebalance threshold
+    
+  # Position lifecycle
+  lifecycle:
+    max_holding_days: 10
+    min_holding_days: 1
+    exit_dte: 5  # Exit when DTE < 5
+    signal_reversal_threshold: -0.5  # Exit on signal reversal
+    
+  # Risk limits
+  risk:
+    max_drawdown: 0.15  # Max 15% drawdown
+    max_var_95: 50000  # Max 95% VaR
+    max_var_99: 100000  # Max 99% VaR
+    max_es_95: 75000  # Max 95% ES
+    max_es_99: 150000  # Max 99% ES
+    
+  # Portfolio constraints
+  constraints:
+    max_gross_exposure: 1000000  # Max gross exposure
+    max_net_exposure: 500000  # Max net exposure
+    max_turnover: 0.5  # Max 50% daily turnover
+    max_concentration: 0.2  # Max 20% in single expiry
+    
+  # Execution
+  execution:
+    entry_time: "09:30:00"  # Market open
+    exit_time: "16:00:00"  # Market close
+    slippage_model: "linear"
+    participation_rate: 0.1  # 10% participation rate

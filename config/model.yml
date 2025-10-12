@@ -1,0 +1,75 @@
+# Machine learning model configuration
+model:
+  # Model type and parameters
+  type: "xgboost"
+  xgboost:
+    n_estimators: 1000
+    max_depth: 6
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    reg_alpha: 0.1
+    reg_lambda: 1.0
+    random_state: 42
+    
+  # Cross-validation
+  cv:
+    n_splits: 5
+    purge_days: 5  # Days to purge between train/test
+    embargo_days: 1  # Days to embargo after test period
+    test_size: 0.2  # Fraction of data for test
+    
+  # Feature engineering
+  features:
+    # Surface features
+    surface:
+      smile_slope: true
+      smile_curvature: true
+      atm_iv: true
+      term_structure_slope: true
+      relative_iv: true
+      
+    # Realized volatility features
+    realized_vol:
+      windows: [5, 10, 20, 30]
+      hv_iv_gap: true
+      skew_zscore: true
+      
+    # Trading features
+    trading:
+      moneyness_buckets: true
+      dte_buckets: true
+      spread_pct: true
+      oi_volume_ratio: true
+      put_call_flag: true
+      
+    # Market features
+    market:
+      underlying_returns: [1, 5, 10]
+      rv_ratio: true
+      vol_regime: true
+      
+  # Label generation
+  labels:
+    type: "delta_hedged_return"  # or "vol_change"
+    lookforward_days: 1
+    min_holding_period: 1
+    max_holding_period: 5
+    
+  # Model calibration
+  calibration:
+    method: "isotonic"
+    cv_folds: 3
+    
+  # Feature selection
+  feature_selection:
+    enabled: true
+    method: "mutual_info"
+    top_k: 50
+    
+  # Model validation
+  validation:
+    min_train_samples: 1000
+    min_test_samples: 200
+    stability_threshold: 0.4  # Kendall's tau for feature importance
+    drift_threshold: 0.2  # PSI threshold for feature drift
