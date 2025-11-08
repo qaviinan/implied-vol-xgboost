@@ -1,6 +1,6 @@
 # VolBoost: Options Volatility Surface ML Strategy
 
-**CV one-liner**: Built a no-arbitrage SVI **options** surface and trained a **gradient-boosted trees (XGBoost)** volatility/return signal to run a delta-hedged, vega-targeted strategy with PnL-explain and VaR/ES backtests.
+A no-arbitrage SVI **options** surface and trained a **gradient-boosted trees (XGBoost)** volatility/return signal to run a delta-hedged, vega-targeted strategy with PnL-explain and VaR/ES backtests.
 
 ## Overview
 
